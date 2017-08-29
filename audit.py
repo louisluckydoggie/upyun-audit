@@ -11,10 +11,10 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 #请求数据库
-db = MySQLdb.connect('10.0.6.60', 'techs_platform', 'techs_platform', 'techs_platform')
+db = MySQLdb.connect('0.0.0.0', 'techs', 'techs', 'techs')
 cur = db.cursor()
-#cur.execute("SELECT * FROM review_domain where if_review = 0")
-cur.execute("SELECT * FROM review_domain where domain_name = 'lalilali.com'")
+cur.execute("SELECT * FROM review_domain where if_review = 0")
+#cur.execute("SELECT * FROM review_domain where domain_name = 'lalilali.com'")
 
 for row in cur.fetchall():
     print row[0]
@@ -51,8 +51,8 @@ for row in cur.fetchall():
     r.encoding = 'UTF-8'
     audit_content = h.handle(r.text)
 
-    #修复了接口返回 400 的错误，只检测前 400 个字符
-    headers = {'Authorization': 'Basic ' + base64.b64encode('test:L12345678y')}
+    #修复了接口返回 400 的错误，只检测前 500 个字符
+    headers = {'Authorization': 'Basic ' + base64.b64encode('operator:password')}
     body = {
         "text": str(audit_content).decode('utf-8')[:500]
     }
